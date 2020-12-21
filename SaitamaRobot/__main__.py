@@ -205,7 +205,7 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(
                     [[
                         InlineKeyboardButton(
-                            text="🧲Add Ash Ketchum to your group!",
+                            text="Add Tanjiro to your group!🙂🙃",
                             url="t.me/{}?startgroup=true".format(
                                 context.bot.username))
                     ],
@@ -215,7 +215,7 @@ def start(update: Update, context: CallbackContext):
                              url=f"https://t.me/{SUPPORT_CHAT}"),
                          InlineKeyboardButton(
                              text="🔔Updates Channel",
-                             url="https://t.me/BotLabUpdates")
+                             url="https://t.me/OnePunchUpdates")
                      ],
                      [
                          InlineKeyboardButton(
@@ -225,7 +225,7 @@ def start(update: Update, context: CallbackContext):
                      [
                          InlineKeyboardButton(
                              text="💾 Source Code.",
-                             url="https://github.com/Uday0011/Ash")
+                             url="https://github.com/JayPatel1314/Tanjiro Kamado")
                      ]]))
     else:
         update.effective_message.reply_text(
