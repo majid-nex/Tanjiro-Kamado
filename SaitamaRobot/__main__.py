@@ -1,4 +1,5 @@
 import importlib
+import html
 import time
 import re
 from sys import argv
@@ -6,7 +7,7 @@ from typing import Optional
 
 from SaitamaRobot import (ALLOW_EXCL, CERT_PATH, DONATION_LINK, LOGGER,
                           OWNER_ID, PORT, SUPPORT_CHAT, TOKEN, URL, WEBHOOK,
-                          SUPPORT_CHAT, dispatcher, StartTime, telethn, updater)
+                          dispatcher, StartTime, telethn, updater, pgram)
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
 from SaitamaRobot.modules import ALL_MODULES
@@ -51,20 +52,20 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-Hi {}, my name is {}! 
+Hey there! My name is *{}* (鬼滅の刃(Kimetsu No Yaiba, Demon Slayer)!
+I Slay Bad Demons Wandering At night and help admins manage their groups with My Commands! Have a look at the following for an idea of some of \
+the things I can help you with. Type /help to see my Functions.
+"""
+
+HELP_STRINGS = """
+Hey there! My name is *{}*.
 I am an Anime themed group management bot.
 To add me to your group click ["HERE"](t.me/TanjiroKamadoRobot?startgroup=botstart)
 You can find my list of available commands with /help.
 [Tanjiro's Repo](github.com/JayPatel1314/Tanjiro-Kamado) 
 See [Basic Configuration Checklist](t.me/OnePunchUpdates/29) on how to secure your group.
 There is No support Group For Tanjiro. Because it's Group Restricted.
- This bot is Forked From Saitama Robot.
-"""
-
-HELP_STRINGS = """
-Hey there! My name is *{}* (鬼滅の刃(Kimetsu No Yaiba, Demon Slayer)!
-I Slay Bad Demons Wandering At night and help admins manage their groups with My Commands! Have a look at the following for an idea of some of \
-the things I can help you with.
+This bot is Forked From Saitama Robot.
 
 *Main* commands available:
  • /help: PM's you this message.
@@ -204,32 +205,31 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(
                     [[
                         InlineKeyboardButton(
-                            text="☑️ Add Tanjiro to your group",
+                            text="🧲Add Ash Ketchum to your group!",
                             url="t.me/{}?startgroup=true".format(
                                 context.bot.username))
                     ],
                      [
                          InlineKeyboardButton(
-                             text="🚑 Support Group",
-                             url=f"https://t.me/TanjiroKamadoSupport"),
+                             text="⚙️ Support Group",
+                             url=f"https://t.me/{SUPPORT_CHAT}"),
                          InlineKeyboardButton(
-                             text="🔔 Updates Channel",
-                             url="https://t.me/OnePunchUpdates")
+                             text="🔔Updates Channel",
+                             url="https://t.me/BotLabUpdates")
                      ],
                      [
                          InlineKeyboardButton(
-                             text="🧾 Getting started guide",
-                             url="https://t.me/OnePunchUpdates/29")
+                             text="📖 Getting Started Guide",
+                             url="https://t.me/BotLabUpdates/3")
                      ],
                      [
                          InlineKeyboardButton(
-                             text="🗄 Source code",
-                             url="https://github.com/JayPatel1314/Tanjiro-Kamado")
+                             text="💾 Source Code.",
+                             url="https://github.com/Uday0011/Ash")
                      ]]))
     else:
         update.effective_message.reply_text(
-            "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
-            .format(uptime),
+            "I'm online!\n<b>Up since:</b> <code>{}</code>".format(uptime),
             parse_mode=ParseMode.HTML)
 
 
@@ -543,16 +543,6 @@ def migrate_chats(update: Update, context: CallbackContext):
 
 
 def main():
-
-    if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
-        try:
-            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "I am now online!")
-        except Unauthorized:
-            LOGGER.warning(
-                "Bot isnt able to send message to support_chat, go and check!")
-        except BadRequest as e:
-            LOGGER.warning(e.message)
-
     test_handler = CommandHandler("test", test)
     start_handler = CommandHandler("start", start)
 
@@ -604,4 +594,5 @@ def main():
 if __name__ == '__main__':
     LOGGER.info("Successfully loaded modules: " + str(ALL_MODULES))
     telethn.start(bot_token=TOKEN)
+    pgram.start()
     main()
