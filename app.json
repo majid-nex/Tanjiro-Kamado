@@ -1,14 +1,14 @@
 {
-      "name": "SaitamaRobot",
+      "name": "TanjiroRobot",
       "description": "An Anime themed Telegram group management bot.",
       "keywords": [
          "telegram",
          "anime",
          "group",
          "manager",
-         "Saitama"
+         "Tanjiro"
       ],   
-   "repository": "https://github.com/AnimeKaizoku/SaitamaRobot",
+   "repository": "https://github.com/JayPatel1314/Tanjiro-Kamado",
    "addons": [
       {
          "options": {
@@ -134,6 +134,11 @@
          "description": "List of chats you want blacklisted.",
          "required": false,
          "value": ""
+      },
+      "REDIS_URL": {
+         "description": "Get One From RedisLabs.com Make Role And Database Make Sure that the Format Of Url Should be: 'redis://Username:pass@endpoint/dbname'"
+         "required": true,
+         "value": "redis://Username:pass@endpoint/dbname"
       },
       "ALLOW_EXCL": {
          "description": "Set this to True if you want ! to be a command prefix along with /. Recommended is True",
