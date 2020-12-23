@@ -6,13 +6,13 @@ import time
 import uuid
 from io import BytesIO
 
-import ItachiRobot.modules.sql.feds_sql as sql
-from ItachiRobot import (EVENT_LOGS, LOGGER, OWNER_ID, DRAGONS, TIGERS, WOLVES,
+import SaitamaRobot.modules.sql.feds_sql as sql
+from SaitamaRobot import (EVENT_LOGS, LOGGER, OWNER_ID, DRAGONS, TIGERS, WOLVES,
                           dispatcher)
-from ItachiRobot.modules.disable import DisableAbleCommandHandler
-from ItachiRobot.modules.helper_funcs.alternate import send_message
-from ItachiRobot.modules.helper_funcs.chat_status import is_user_admin
-from ItachiRobot.modules.helper_funcs.extraction import (extract_unt_fedban,
+from SaitamaRobot.modules.disable import DisableAbleCommandHandler
+from SaitamaRobot.modules.helper_funcs.alternate import send_message
+from SaitamaRobot.modules.helper_funcs.chat_status import is_user_admin
+from SaitamaRobot.modules.helper_funcs.extraction import (extract_unt_fedban,
                                                           extract_user,
                                                           extract_user_fban)
 from ItachiRobot.modules.helper_funcs.string_handling import markdown_parser
