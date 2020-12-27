@@ -16,7 +16,7 @@ Can be found on telegram as [Tanjiro Kamado](https://t.me/TanjiroKamadoRoBot).
 
 The Support group can be reached out to at [Tanjiro Kamado Support Support](https://t.me/TanjiroKamadoSupport), where you can ask for help about [Tanjiro Kamado](https://t.me/TanjiroKamadoRoBot), discover/request new features, report bugs, and stay in the loop whenever a new update is available. 
 
-News channel as at [One Punch Updates](https://t.me/OnePunchUpdates) 
+News channel as at [Tanjiro Updates](https://t.me/TanjiroUpdates) 
 
 ## How to setup/deploy.
 
