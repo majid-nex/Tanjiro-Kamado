@@ -64,8 +64,8 @@ To add me to your group click ["HERE"](t.me/TanjiroKamadoRobot?startgroup=botsta
 You can find my list of available commands with /help.
 [Tanjiro's Repo](github.com/JayPatel1314/Tanjiro-Kamado) 
 See [Basic Configuration Checklist](t.me/OnePunchUpdates/29) on how to secure your group.
-There is No support Group For Tanjiro. Because it's Group Restricted.
-This bot is Forked From Saitama Robot.
+If any Questions Regarding Tanjiro Then Join [Tanjiro Support](https://t.me/TanjiroKamadoSupport).
+This bot is Forked From [Saitama Robot](https://t.me/SaitamaRobot).
 
 *Main* commands available:
  • /help: PM's you this message.
@@ -205,31 +205,31 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(
                     [[
                         InlineKeyboardButton(
-                            text="Add Tanjiro to your group!🙂🙃",
+                            text="🙃Add Tanjiro Kamado to your group!🙃",
                             url="t.me/{}?startgroup=true".format(
                                 context.bot.username))
                     ],
                      [
                          InlineKeyboardButton(
-                             text="⚙️ Support Group",
-                             url=f"https://t.me/{SUPPORT_CHAT}"),
+                             text="👀Support Group",
+                             url=f"https://t.me/{Support Group}"),
                          InlineKeyboardButton(
-                             text="🔔Updates Channel",
-                             url="https://t.me/OnePunchUpdates")
+                             text="📃Updates Channel📃",
+                             url="https://t.me/TanjiroUpdates")
                      ],
                      [
                          InlineKeyboardButton(
-                             text="📖 Getting Started Guide",
-                             url="https://t.me/BotLabUpdates/3")
+                             text="💬Getting Started Guide💬",
+                             url="https://t.me/TanjiroUpdates/3")
                      ],
                      [
                          InlineKeyboardButton(
-                             text="💾 Source Code.",
-                             url="https://github.com/JayPatel1314/Tanjiro Kamado")
+                             text="📸 Source Code.",
+                             url="https://github.com/JayPatel1314/Tanjiro-Kamado")
                      ]]))
     else:
         update.effective_message.reply_text(
-            "I'm online!\n<b>Up since:</b> <code>{}</code>".format(uptime),
+            "I'm online!\n<b>I haven't sleep since:</b> <code>{}</code>".format(uptime),
             parse_mode=ParseMode.HTML)
 
 
