@@ -2,13 +2,16 @@ import html
 import random
 import time
 
+from typing import Optional
 from telegram import ParseMode, Update, ChatPermissions
 from telegram.ext import CallbackContext, run_async
+from tswift import Song
 from telegram.error import BadRequest
 
 import SaitamaRobot.modules.fun_strings as fun_strings
 from SaitamaRobot import dispatcher
 from SaitamaRobot.modules.disable import DisableAbleCommandHandler
+from SaitamaRobot.modules.helper_funcs.alternate import send_message, typing_action
 from SaitamaRobot.modules.helper_funcs.chat_status import (is_user_admin)
 from SaitamaRobot.modules.helper_funcs.extraction import extract_user
 
@@ -133,6 +136,33 @@ def pat(update: Update, context: CallbackContext):
         reply = temp.format(user1=user1, user2=user2)
         reply_to.reply_text(reply, parse_mode=ParseMode.HTML)
 
+@run_async
+@typing_action
+def lyrics(update: Update, context: CallbackContext):
+    bot, args = context.bot, context.args
+    msg = update.effective_message
+    query = " ".join(args)
+    song = ""
+    if not query:
+        msg.reply_text("You haven't specified which song to look for!")
+        return
+    song = Song.find_song(query)
+    if song:
+        if song.lyrics:
+            reply = song.format()
+        else:
+            reply = "Couldn't find any lyrics for that song!"
+    else:
+        reply = "Song not found!"
+    if len(reply) > 4090:
+        with open("lyrics.txt", 'w') as f:
+            f.write(f"{reply}\n\n\nOwO UwU OmO")
+        with open("lyrics.txt", 'rb') as f:
+            msg.reply_document(document=f,
+            caption="Message length exceeded max limit! Sending as a text file.")
+    else:
+        msg.reply_text(reply)
+
 
 @run_async
 def roll(update: Update, context: CallbackContext):
@@ -203,6 +233,7 @@ __help__ = """
  • `/pat`*:* pats a user, or get patted
  • `/fun`*:* funny text,stricker and gif send
  • `/aq`*:* get random anime quote
+ • `/lyrics <song name> `*:* text to voice
  • `/plet <text> `*:* text get funny emojify
  • `/tts <text> `*:* text to voice
 """
@@ -217,6 +248,7 @@ SHRUG_HANDLER = DisableAbleCommandHandler("shrug", shrug)
 BLUETEXT_HANDLER = DisableAbleCommandHandler("bluetext", bluetext)
 RLG_HANDLER = DisableAbleCommandHandler("rlg", rlg)
 DECIDE_HANDLER = DisableAbleCommandHandler("decide", decide)
+LYRICS_HANDLER = DisableAbleCommandHandler("lyrics", lyrics)
 TABLE_HANDLER = DisableAbleCommandHandler("table", table)
 
 dispatcher.add_handler(SANITIZE_HANDLER)
@@ -225,6 +257,7 @@ dispatcher.add_handler(SLAP_HANDLER)
 dispatcher.add_handler(PAT_HANDLER)
 dispatcher.add_handler(ROLL_HANDLER)
 dispatcher.add_handler(TOSS_HANDLER)
+dispatcher.add_handler(LYRICS_HANDLER)
 dispatcher.add_handler(SHRUG_HANDLER)
 dispatcher.add_handler(BLUETEXT_HANDLER)
 dispatcher.add_handler(RLG_HANDLER)
@@ -234,10 +267,10 @@ dispatcher.add_handler(TABLE_HANDLER)
 __mod_name__ = "Fun"
 __command_list__ = [
     "runs", "slap", "roll", "toss", "shrug", "bluetext", "rlg", "decide",
-    "table", "pat", "sanitize"
+    "table", "pat", "sanitize", "lyrics",
 ]
 __handlers__ = [
     RUNS_HANDLER, SLAP_HANDLER, PAT_HANDLER, ROLL_HANDLER, TOSS_HANDLER,
     SHRUG_HANDLER, BLUETEXT_HANDLER, RLG_HANDLER, DECIDE_HANDLER, TABLE_HANDLER,
-    SANITIZE_HANDLER
+    SANITIZE_HANDLER, LYRICS_HANDLER
 ]
