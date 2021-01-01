@@ -39,6 +39,11 @@ def sanitize(update: Update, context: CallbackContext):
     reply_animation(
         random.choice(fun_strings.GIFS), caption=f'*Sanitizes {name}*')
 
+@run_async
+def eightball(update: Update, context: CallbackContext):
+    reply_text = update.effective_message.reply_to_message.reply_text if update.effective_message.reply_to_message else update.effective_message.reply_text
+    reply_text(random.choice(fun_strings.EIGHTBALL))
+
 
 @run_async
 def slap(update: Update, context: CallbackContext):
@@ -214,6 +219,43 @@ def table(update: Update, context: CallbackContext):
     reply_text = update.effective_message.reply_to_message.reply_text if update.effective_message.reply_to_message else update.effective_message.reply_text
     reply_text(random.choice(fun_strings.TABLE))
 
+normiefont = [
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
+    'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+]
+weebyfont = [
+    '卂', '乃', '匚', '刀', '乇', '下', '厶', '卄', '工', '丁', '长', '乚', '从', '𠘨', '口',
+    '尸', '㔿', '尺', '丂', '丅', '凵', 'リ', '山', '乂', '丫', '乙'
+]
+
+
+@run_async
+def weebify(update: Update, context: CallbackContext):
+    args = context.args
+    message = update.effective_message
+    string = ""
+
+    if message.reply_to_message:
+        string = message.reply_to_message.text.lower().replace(" ", "  ")
+
+    if args:
+        string = '  '.join(args).lower()
+
+    if not string:
+        message.reply_text(
+            "Usage is `/weebify <text>`", parse_mode=ParseMode.MARKDOWN)
+        return
+
+    for normiecharacter in string:
+        if normiecharacter in normiefont:
+            weebycharacter = weebyfont[normiefont.index(normiecharacter)]
+            string = string.replace(normiecharacter, weebycharacter)
+
+    if message.reply_to_message:
+        message.reply_to_message.reply_text(string)
+    else:
+        message.reply_text(string)
+
 
 __help__ = """
  • `/runs`*:* reply a random string from an array of replies
@@ -236,6 +278,7 @@ __help__ = """
  • `/lyrics <song name> `*:* text to voice
  • `/plet <text> `*:* text get funny emojify
  • `/tts <text> `*:* text to voice
+ • `/8ball`*:* predicts using 8ball method
 """
 
 SANITIZE_HANDLER = DisableAbleCommandHandler("sanitize", sanitize)
@@ -248,8 +291,10 @@ SHRUG_HANDLER = DisableAbleCommandHandler("shrug", shrug)
 BLUETEXT_HANDLER = DisableAbleCommandHandler("bluetext", bluetext)
 RLG_HANDLER = DisableAbleCommandHandler("rlg", rlg)
 DECIDE_HANDLER = DisableAbleCommandHandler("decide", decide)
+EIGHTBALL_HANDLER = DisableAbleCommandHandler("8ball", eightball)
 LYRICS_HANDLER = DisableAbleCommandHandler("lyrics", lyrics)
 TABLE_HANDLER = DisableAbleCommandHandler("table", table)
+WEEBIFY_HANDLER = DisableAbleCommandHandler("weebify", weebify)
 
 dispatcher.add_handler(SANITIZE_HANDLER)
 dispatcher.add_handler(RUNS_HANDLER)
@@ -259,18 +304,20 @@ dispatcher.add_handler(ROLL_HANDLER)
 dispatcher.add_handler(TOSS_HANDLER)
 dispatcher.add_handler(LYRICS_HANDLER)
 dispatcher.add_handler(SHRUG_HANDLER)
+dispatcher.add_handler(EIGHTBALL_HANDLER)
 dispatcher.add_handler(BLUETEXT_HANDLER)
 dispatcher.add_handler(RLG_HANDLER)
 dispatcher.add_handler(DECIDE_HANDLER)
 dispatcher.add_handler(TABLE_HANDLER)
+dispatcher.add_handler(WEEBIFY_HANDLER)
 
 __mod_name__ = "Fun"
 __command_list__ = [
     "runs", "slap", "roll", "toss", "shrug", "bluetext", "rlg", "decide",
-    "table", "pat", "sanitize", "lyrics",
+    "table", "pat", "sanitize", "lyrics", "weebify",
 ]
 __handlers__ = [
     RUNS_HANDLER, SLAP_HANDLER, PAT_HANDLER, ROLL_HANDLER, TOSS_HANDLER,
     SHRUG_HANDLER, BLUETEXT_HANDLER, RLG_HANDLER, DECIDE_HANDLER, TABLE_HANDLER,
-    SANITIZE_HANDLER, LYRICS_HANDLER
+    SANITIZE_HANDLER, LYRICS_HANDLER, EIGHTBALL_HANDLER, WEEBIFY_HANDLER
 ]
