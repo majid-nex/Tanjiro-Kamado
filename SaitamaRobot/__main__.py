@@ -52,20 +52,18 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-Hey there! My name is *{}* (鬼滅の刃(Kimetsu No Yaiba, Demon Slayer)!
-I Slay Bad Demons Wandering At night and help admins manage their groups with My Commands! Have a look at the following for an idea of some of \
+Hey there! My name is *{}* (I am pikachu )!
+I am cutest pokemon in the world and help admins manage their groups with My Commands! Have a look at the following for an idea of some of \
 the things I can help you with. Type /help to see my Functions.
 """
 
 HELP_STRINGS = """
 Hey there! My name is *{}*.
-I am an Anime themed group management bot.
-To add me to your group click ["HERE"](t.me/TanjiroKamadoRobot?startgroup=botstart)
+I am cutest group management bot.
+To add me to your group click ["HERE"](http://t.me/Pikachu6_bot?startgroup=botstart)
 You can find my list of available commands with /help.
-[Tanjiro's Repo](github.com/JayPatel1314/Tanjiro-Kamado) 
-See [Basic Configuration Checklist](t.me/OnePunchUpdates/29) on how to secure your group.
-If any Questions Regarding Tanjiro Then Join [Tanjiro Support](https://t.me/TanjiroKamadoSupport).
-This bot is Forked From [Saitama Robot](https://t.me/SaitamaRobot).
+[majid-nex repo Repo](github.com/majid-nex/Tanjiro-Kamado) 
+If any Questions Regarding pikachu Then Join [Pikachu Support](https://t.me/pikachusupport9).
 
 *Main* commands available:
  • /help: PM's you this message.
@@ -82,12 +80,9 @@ And the following:
     dispatcher.bot.first_name, ""
     if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
-SAITAMA_IMG = "https://telegra.ph/file/27af4c96f012a3bb176a7.jpg"
+SAITAMA_IMG = "https://telegra.ph/pika-01-20"
 
-DONATE_STRING = """Heya, glad to hear you want to donate!
-Saitama is hosted on one of Kaizoku's Servers and doesn't require any donations as of now but \
-You can donate to the original writer of the Base code, Paul
-There are two ways of supporting him; [PayPal](paypal.me/PaulSonOfLars), or [Monzo](monzo.me/paulnionvestergaardlarsen)."""
+DONATE_STRING = """Hey tumhe donate karna hai lekin mujhe nahi chahiye."""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -328,7 +323,7 @@ def get_help(update: Update, context: CallbackContext):
         if len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
             module = args[1].lower()
             update.effective_message.reply_text(
-                f"Contact me in PM to get help of {module.capitalize()}",
+                f"Pm mai contact karo {module.capitalize()}",
                 reply_markup=InlineKeyboardMarkup([[
                     InlineKeyboardButton(
                         text="Help",
@@ -347,7 +342,7 @@ def get_help(update: Update, context: CallbackContext):
 
     elif len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
         module = args[1].lower()
-        text = "Here is the available help for the *{}* module:\n".format(HELPABLE[module].__mod_name__) \
+        text = "Yeh hai available help *{}* module ke liye:\n".format(HELPABLE[module].__mod_name__) \
                + HELPABLE[module].__help__
         send_help(
             chat.id, text,
@@ -381,14 +376,14 @@ def send_settings(chat_id, user_id, user=False):
             chat_name = dispatcher.bot.getChat(chat_id).title
             dispatcher.bot.send_message(
                 user_id,
-                text="Which module would you like to check {}'s settings for?"
+                text="Konsa module pasand hai tumhe {}'s settings for?"
                 .format(chat_name),
                 reply_markup=InlineKeyboardMarkup(
                     paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)))
         else:
             dispatcher.bot.send_message(
                 user_id,
-                "Seems like there aren't any chat settings available :'(\nSend this "
+                "Mujhe lagta aisa koi nahi hai chat settings mai :'(\nSend this "
                 "in a group chat you're admin in to find its current settings!",
                 parse_mode=ParseMode.MARKDOWN)
 
